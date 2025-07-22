@@ -1,0 +1,33 @@
+# application.yml
+server:
+  port: 8080
+
+spring:
+  application:
+    name: geolocation-api
+  cache:
+    type: simple # Use in-memory caching for now
+    cache-names:
+      - geolocations
+    caffeine:
+      spec: maximumSize=10000,expireAfterWrite=1h
+
+# MaxMind Configuration
+maxmind:
+  license-key: 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 # Get free key from MaxMind
+  database-path: ${user.home}/geolite2
+  auto-update: true
+  update-interval: 7 # days
+  databases:
+    country: GeoLite2-Country.mmdb
+    city: GeoLite2-City.mmdb
+    asn: GeoLite2-ASN.mmdb
+  download-urls:
+    country: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${maxmind.license-key}&suffix=tar.gz
+    city: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${maxmind.license-key}&suffix=tar.gz
+    asn: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${maxmind.license-key}&suffix=tar.gz
+
+logging:
+  level:
+    com.yourpackage.geolocation: DEBUG
+    org.springframework.cache: DEBUG
