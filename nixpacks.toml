@@ -1,4 +1,3 @@
-nixpacks.toml - Railway Java 17 configuration
 [phases.setup]
 nixPkgs = ["openjdk17", "gradle"]
 

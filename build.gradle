@@ -7,18 +7,6 @@ plugins {
 group = 'com.nyusta'
 version = '0.0.1-SNAPSHOT'
 
-//java {
-//	toolchain {
-//		languageVersion = JavaLanguageVersion.of(11)
-//	}
-//}
-
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.3'
-	id 'io.spring.dependency-management' version '1.1.7'
-}
-
 java {
 	sourceCompatibility = '17'
 	targetCompatibility = '17'
@@ -51,10 +39,10 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
 tasks.named('bootJar') {
 	archiveFileName = 'geolocation-api.jar'
 
-	// JVM optimization flags
 	manifest {
 		attributes(
 				'Main-Class': 'org.springframework.boot.loader.JarLauncher',
@@ -63,7 +51,6 @@ tasks.named('bootJar') {
 	}
 }
 
-// Production build profile
 tasks.register('prodBuild') {
 	dependsOn 'clean', 'build'
 	description = 'Clean and build for production'
@@ -72,5 +59,3 @@ tasks.register('prodBuild') {
 		println 'Production build completed'
 	}
 }
-
-
