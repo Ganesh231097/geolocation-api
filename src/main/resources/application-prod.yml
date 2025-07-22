@@ -1,0 +1,25 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  profiles:
+    active: prod
+  cache:
+    type: simple
+    caffeine:
+      spec: maximumSize=50000,expireAfterWrite=2h
+
+maxmind:
+  license-key: ${MAXMIND_LICENSE_KEY}
+  database-path: ${HOME}/geolite2
+  auto-update: true
+  update-interval: 3  # More frequent updates in prod
+
+logging:
+  level:
+    com.nyusta.geolocation_api: INFO
+    org.springframework.cache: WARN
+    com.maxmind: INFO
+    root: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

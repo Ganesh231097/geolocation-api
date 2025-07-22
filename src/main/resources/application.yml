@@ -14,7 +14,7 @@ spring:
 
 # MaxMind Configuration
 maxmind:
-  license-key:  ${MAXMIND_LICENSE_KEY} # Get free key from MaxMind
+  license-key: ${MAXMIND_LICENSE_KEY} # Get free key from MaxMind
   database-path: ${user.home}/geolite2
   auto-update: true
   update-interval: 7 # days

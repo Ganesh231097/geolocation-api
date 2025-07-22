@@ -40,3 +40,24 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+tasks.named('bootJar') {
+	archiveFileName = 'geolocation-api.jar'
+
+	// JVM optimization flags
+	manifest {
+		attributes(
+				'Main-Class': 'org.springframework.boot.loader.JarLauncher',
+				'Multi-Release': 'true'
+		)
+	}
+}
+
+// Production build profile
+tasks.register('prodBuild') {
+	dependsOn 'clean', 'build'
+	description = 'Clean and build for production'
+
+	doLast {
+		println 'Production build completed'
+	}
+}
