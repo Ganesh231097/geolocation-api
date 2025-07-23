@@ -5,6 +5,8 @@ server:
 spring:
   application:
     name: geolocation-api
+  profiles:
+    active: prod
   cache:
     type: simple # Use in-memory caching for now
     cache-names:

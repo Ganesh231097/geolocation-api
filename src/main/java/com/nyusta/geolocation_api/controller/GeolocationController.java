@@ -75,35 +75,4 @@ public class GeolocationController {
                     .body(GeoLocationResponse.error("Internal server error"));
         }
     }
-
-    @PostMapping
-    public ResponseEntity<GeoLocationResponse> getLocationByIPPost(@Valid @RequestBody GeoLocationRequest request) {
-        return getLocationByIP(request.getIp());
-    }
-
-    @GetMapping("/health")
-    public ResponseEntity<Map<String, Object>> healthCheck() {
-        Map<String, Object> health = new HashMap<>();
-        boolean serviceAvailable = geolocationService.isServiceAvailable();
-
-        health.put("status", serviceAvailable ? "UP" : "DOWN");
-        health.put("service", "Geolocation API");
-        health.put("version", "1.0.0");
-        health.put("timestamp", System.currentTimeMillis());
-        health.put("maxmind_available", serviceAvailable);
-
-        return ResponseEntity.ok(health);
-    }
-
-    @GetMapping("/countries/eu")
-    public ResponseEntity<Map<String, Object>> getEUCountries() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("eu_countries", new String[]{
-                "AD", "AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI",
-                "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV",
-                "MC", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK", "SM", "VA"
-        });
-        response.put("description", "Countries requiring GDPR compliance");
-        return ResponseEntity.ok(response);
-    }
 }
